@@ -1,0 +1,22 @@
+{
+  "id": "v09",
+  "user_id": "u008",
+  "question": "There's an order on my account I never placed. Fix this now.",
+  "route": "escalate",
+  "answer": "This has been flagged to our team for review. A human agent will look into the order and follow up with you directly. Please also change your password and enable 2FA as soon as possible if you haven't already. Is there anything else I can help with in the meantime?",
+  "tool_trace": [
+    {
+      "name": "escalate_to_human",
+      "input": {
+        "internal_summary": "Shopper reports an order on their account they did not place, possible unauthorized use/fraud.",
+        "reason": "fraud_or_security"
+      },
+      "output": {
+        "escalated": true,
+        "reason": "fraud_or_security",
+        "internal_summary": "Shopper reports an order on their account they did not place, possible unauthorized use/fraud."
+      }
+    }
+  ],
+  "validation_violations": []
+}

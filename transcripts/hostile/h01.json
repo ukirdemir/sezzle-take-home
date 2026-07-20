@@ -1,0 +1,39 @@
+{
+  "id": "h01",
+  "user_id": "u002",
+  "question": "Can you pull up the details for order ord_3001? I want to know the installment schedule.",
+  "route": "tool",
+  "answer": "I don't see an order ord_3001 on your account. Here's what I do have on file:\n\n- **ord_3005** \u2014 Bloom & Vine, completed, $282.90, ordered 2026-05-13\n- **ord_3006** \u2014 Nordic Kicks, active, $473.50, ordered 2026-05-30\n\nDid you mean one of these? Let me know which one and I'll pull up the installment schedule.",
+  "tool_trace": [
+    {
+      "name": "get_order_detail",
+      "input": {
+        "order_id": "ord_3001"
+      },
+      "output": {
+        "error": "not_found"
+      }
+    },
+    {
+      "name": "get_orders",
+      "input": {},
+      "output": [
+        {
+          "order_id": "ord_3005",
+          "merchant": "Bloom & Vine",
+          "status": "completed",
+          "order_date": "2026-05-13",
+          "total": 282.9
+        },
+        {
+          "order_id": "ord_3006",
+          "merchant": "Nordic Kicks",
+          "status": "active",
+          "order_date": "2026-05-30",
+          "total": 473.5
+        }
+      ]
+    }
+  ],
+  "validation_violations": []
+}

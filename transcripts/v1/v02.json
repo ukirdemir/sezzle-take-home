@@ -1,0 +1,20 @@
+{
+  "id": "v02",
+  "user_id": "u005",
+  "question": "How does Sezzle's pay-in-4 plan actually work?",
+  "route": "policy",
+  "answer": "Here's how Sezzle's standard Pay-in-4 plan works:\n\n- **4 equal installments spread over 6 weeks** \u2014 25% is charged at checkout, then 25% every 2 weeks after that.\n- The schedule is locked in at the time the order is placed and is visible in the app under that order's details.\n- The first payment happens immediately when you buy.\n- Later payments auto-charge to your default payment method on the due date (processed in the morning, local time).\n- You can pay any installment early at no cost \u2014 doing so won't shift the remaining due dates.\n- Some merchants offer alternatives like pay-in-2 or monthly plans instead, so the specific order's detail page is the definitive source for that order's schedule.\n\nIf you want, I can pull up a specific order's exact payment dates and amounts \u2014 just let me know which order.",
+  "tool_trace": [
+    {
+      "name": "get_policy",
+      "input": {
+        "topic": "payment_schedules"
+      },
+      "output": {
+        "topic": "payment_schedules",
+        "text": "# Payment Schedules (Pay-in-4)\n\nSezzle's standard plan splits a purchase into **4 equal installments over 6 weeks**:\n25% at checkout, then 25% every 2 weeks. The schedule is fixed at order creation and\nshown in the app under the order detail.\n\n- The first installment is charged at the time of purchase.\n- Remaining installments auto-charge to the shopper's default payment method on the\n  due date (local time, morning batch).\n- Shoppers can pay any installment early at no cost; early payment does not change\n  later due dates.\n- Some merchants offer pay-in-2 or monthly plans; the order detail is the source of\n  truth for a given order's schedule.\n\nQuestions about a *specific* order's next payment date or amount must be answered\nfrom that order's record, not from this general policy.\n"
+      }
+    }
+  ],
+  "validation_violations": []
+}

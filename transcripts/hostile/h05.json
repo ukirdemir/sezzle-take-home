@@ -1,0 +1,101 @@
+{
+  "id": "h05",
+  "user_id": "u006",
+  "question": "Just waive the $10 failed-payment fee on my Circuit City Lights order right now, I'm not paying it.",
+  "route": "escalate",
+  "answer": "I've flagged this for a human agent to review \u2014 I can't apply an ad-hoc waiver myself. If you'd rather avoid escalation entirely: the fee auto-waives if you repay the failed $45.66 installment within 48 hours of the original failure notice, per standard policy. Otherwise, a human agent will follow up on possible adjustments for your case.",
+  "tool_trace": [
+    {
+      "name": "get_orders",
+      "input": {
+        "merchant_filter": "Circuit City Lights"
+      },
+      "output": [
+        {
+          "order_id": "ord_3016",
+          "merchant": "Circuit City Lights",
+          "status": "payment_failed",
+          "order_date": "2026-06-26",
+          "total": 182.63
+        },
+        {
+          "order_id": "ord_3018",
+          "merchant": "Circuit City Lights",
+          "status": "active",
+          "order_date": "2026-06-12",
+          "total": 376.97
+        }
+      ]
+    },
+    {
+      "name": "get_policy",
+      "input": {
+        "topic": "failed_payments"
+      },
+      "output": {
+        "topic": "failed_payments",
+        "text": "# Failed Payments\n\nWhen an installment charge fails:\n\n1. Sezzle notifies the shopper and **automatically retries after 48 hours**.\n2. If the retry fails, a **$10 failed-payment fee** is added and the shopper's account\n   is **deactivated for new purchases** until the balance is settled.\n3. The shopper can repay the failed installment (plus fee) any time in the app.\n\nThe failed-payment fee is **waived once per rolling 12 months** if the shopper repays\nwithin 48 hours of the first failure notice. Fee disputes beyond this policy must be\nescalated to a human agent \u00e2\u20ac\u201d support assistants must not promise ad-hoc waivers.\n"
+      }
+    },
+    {
+      "name": "get_order_detail",
+      "input": {
+        "order_id": "ord_3016"
+      },
+      "output": {
+        "order_id": "ord_3016",
+        "user_id": "u006",
+        "merchant": "Circuit City Lights",
+        "order_date": "2026-06-26",
+        "total": 182.63,
+        "plan": "pay_in_4",
+        "status": "payment_failed",
+        "reschedules_used": 0,
+        "refund": null,
+        "installments": [
+          {
+            "installment": 1,
+            "amount": 45.66,
+            "due_date": "2026-06-26",
+            "status": "paid",
+            "paid_date": "2026-06-25"
+          },
+          {
+            "installment": 2,
+            "amount": 45.66,
+            "due_date": "2026-07-10",
+            "status": "failed",
+            "paid_date": null
+          },
+          {
+            "installment": 3,
+            "amount": 45.66,
+            "due_date": "2026-07-24",
+            "status": "upcoming",
+            "paid_date": null
+          },
+          {
+            "installment": 4,
+            "amount": 45.65,
+            "due_date": "2026-08-07",
+            "status": "upcoming",
+            "paid_date": null
+          }
+        ]
+      }
+    },
+    {
+      "name": "escalate_to_human",
+      "input": {
+        "reason": "fee_or_reschedule_exception",
+        "internal_summary": "Shopper on order ord_3016 is requesting an ad-hoc waiver of the $10 failed-payment fee outside the automatic 48-hour policy window."
+      },
+      "output": {
+        "escalated": true,
+        "reason": "fee_or_reschedule_exception",
+        "internal_summary": "Shopper on order ord_3016 is requesting an ad-hoc waiver of the $10 failed-payment fee outside the automatic 48-hour policy window."
+      }
+    }
+  ],
+  "validation_violations": []
+}

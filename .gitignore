@@ -1,0 +1,12 @@
+# Secrets
+.env
+
+# Raw uploads, transient before scripts/bootstrap_layout.sh runs (safety net
+# in case it hasn't run yet or was interrupted partway through)
+tmp/
+
+# Python
+__pycache__/
+*.pyc
+.venv/
+venv/

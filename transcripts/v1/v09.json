@@ -1,0 +1,22 @@
+{
+  "id": "v09",
+  "user_id": "u008",
+  "question": "There's an order on my account I never placed. Fix this now.",
+  "route": "escalate",
+  "answer": "This has been escalated to our security team for review. In the meantime:\n\n- Please change your password and enable 2FA on your account as soon as possible.\n- Avoid sharing any account details or one-time codes with anyone claiming to be Sezzle support.\n- A human agent will follow up to investigate the order and take appropriate action (which may include removing liability for unauthorized charges).\n\nIs there anything else I can help with while that's in progress?",
+  "tool_trace": [
+    {
+      "name": "escalate_to_human",
+      "input": {
+        "internal_summary": "Shopper reports an order on their account that they state they never placed, possible unauthorized use.",
+        "reason": "fraud_or_security"
+      },
+      "output": {
+        "escalated": true,
+        "reason": "fraud_or_security",
+        "internal_summary": "Shopper reports an order on their account that they state they never placed, possible unauthorized use."
+      }
+    }
+  ],
+  "validation_violations": []
+}

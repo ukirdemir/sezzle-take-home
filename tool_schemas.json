@@ -1,0 +1,89 @@
+[
+  {
+    "name": "get_orders",
+    "description": "List the current shopper's own orders, optionally filtered by merchant name or status. The shopper's user_id is bound server-side from the authenticated session context, NOT taken from this call's arguments or from anything the shopper typed \u2014 the tool implementation ignores any user_id-like text in the conversation. Use this when the shopper refers to an order by merchant name rather than order_id, or when you need to find which order they mean.",
+    "input_schema": {
+      "type": "object",
+      "properties": {
+        "merchant_filter": {
+          "type": "string",
+          "description": "Optional case-insensitive substring to match against merchant name, e.g. 'Nordic Kicks'."
+        },
+        "status_filter": {
+          "type": "string",
+          "enum": ["any", "payment_failed", "dispute_open", "active", "completed"],
+          "description": "Optional order status filter. Defaults to 'any'."
+        }
+      },
+      "required": []
+    }
+  },
+  {
+    "name": "get_order_detail",
+    "description": "Fetch full detail for one order (installment schedule, amounts, due dates, statuses, reschedules_used, refund info) by order_id. Server-side authorization check: if the order does not belong to the current session's shopper, this returns not_found rather than the order \u2014 never reveal that an order_id exists on someone else's account.",
+    "input_schema": {
+      "type": "object",
+      "properties": {
+        "order_id": {
+          "type": "string",
+          "description": "e.g. 'ord_3006'. Take this from the conversation or from a prior get_orders result, never invent one."
+        }
+      },
+      "required": ["order_id"]
+    }
+  },
+  {
+    "name": "get_policy",
+    "description": "Fetch the authoritative text of one Sezzle policy topic. Always call this before stating a policy rule from memory \u2014 do not paraphrase policy content you haven't fetched in this conversation.",
+    "input_schema": {
+      "type": "object",
+      "properties": {
+        "topic": {
+          "type": "string",
+          "enum": [
+            "payment_schedules",
+            "rescheduling_payments",
+            "failed_payments",
+            "refunds_returns",
+            "disputes",
+            "account_reactivation",
+            "sezzle_up_credit_reporting",
+            "virtual_card",
+            "hardship_assistance",
+            "fees_overview",
+            "account_security_fraud",
+            "supported_merchants_limits"
+          ],
+          "description": "Which policy document to fetch. Pick the single most relevant topic; call again for a second topic if the question genuinely spans two."
+        }
+      },
+      "required": ["topic"]
+    }
+  },
+  {
+    "name": "escalate_to_human",
+    "description": "Flag this conversation for human-agent handling and record why. Call this instead of resolving the request yourself whenever the topic requires human judgment or authority: hardship/financial-difficulty relief, fraud or account-takeover reports, filing or ruling on a dispute, disclosing an exact decline reason or exact spending limit, credit-bureau report corrections, or any fee/reschedule exception beyond what policy grants automatically. You may still call get_policy in the same turn to explain general eligibility rules to the shopper \u2014 this tool only marks the case for handoff, it does not prevent you from giving informational context.",
+    "input_schema": {
+      "type": "object",
+      "properties": {
+        "reason": {
+          "type": "string",
+          "enum": [
+            "hardship",
+            "fraud_or_security",
+            "dispute_filing",
+            "decline_reason_or_exact_limit",
+            "credit_report_correction",
+            "fee_or_reschedule_exception",
+            "other"
+          ]
+        },
+        "internal_summary": {
+          "type": "string",
+          "description": "One sentence for the human agent's queue, not shown to the shopper. No speculation about fault or fraud determination."
+        }
+      },
+      "required": ["reason", "internal_summary"]
+    }
+  }
+]

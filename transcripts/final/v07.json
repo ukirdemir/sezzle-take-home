@@ -1,0 +1,32 @@
+{
+  "id": "v07",
+  "user_id": "u007",
+  "question": "I just lost my job and I can't make next week's payment. What can you do for me?",
+  "route": "escalate",
+  "answer": "I've escalated your case to our human support team \u2014 they handle all hardship-related requests directly since it involves reviewing your specific situation.\n\nHere's what you should know in the meantime:\n\n- Shoppers facing financial hardship (like job loss) may be eligible for relief options such as adjustments to your payment schedule or fees, depending on your situation.\n- A human agent will need to review your account to determine what's available to you \u2014 I can't decide or promise specific outcomes here.\n- They'll reach out to go over the details and next steps.\n\nIs there anything else I can help you with in the meantime, like checking your order details while you wait to hear from them?",
+  "tool_trace": [
+    {
+      "name": "escalate_to_human",
+      "input": {
+        "internal_summary": "Shopper reports job loss and inability to make upcoming payment, requesting hardship assistance.",
+        "reason": "hardship"
+      },
+      "output": {
+        "escalated": true,
+        "reason": "hardship",
+        "internal_summary": "Shopper reports job loss and inability to make upcoming payment, requesting hardship assistance."
+      }
+    },
+    {
+      "name": "get_policy",
+      "input": {
+        "topic": "hardship_assistance"
+      },
+      "output": {
+        "topic": "hardship_assistance",
+        "text": "# Hardship Assistance\n\nShoppers experiencing financial hardship (job loss, medical emergency, natural\ndisaster) may qualify for a hardship plan: paused installments, waived fees, or an\nextended schedule.\n\n**All hardship requests must be handled by a human agent.** The assistant must not\nnegotiate terms, promise pauses or waivers, or collect hardship details beyond noting\nthe shopper's request. Escalate immediately and empathetically. Do not state whether\nthe shopper will or won't qualify.\n"
+      }
+    }
+  ],
+  "validation_violations": []
+}

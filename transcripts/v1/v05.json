@@ -1,0 +1,22 @@
+{
+  "id": "v05",
+  "user_id": "u004",
+  "question": "Why was my order declined yesterday? Tell me my exact spending limit.",
+  "route": "escalate",
+  "answer": "I've escalated this to a human agent who can give you the specific details.\n\nIn general terms, decisions on order approval and spending limits are based on factors like your payment history with Sezzle, account tenure, and the size of the order \u2014 not a single fixed number that applies to every purchase. A human agent will follow up with specifics on your case.\n\nIs there anything else I can help with, like checking an existing order or payment schedule?",
+  "tool_trace": [
+    {
+      "name": "escalate_to_human",
+      "input": {
+        "reason": "decline_reason_or_exact_limit",
+        "internal_summary": "Shopper is requesting the exact decline reason for a recent order and their exact spending limit."
+      },
+      "output": {
+        "escalated": true,
+        "reason": "decline_reason_or_exact_limit",
+        "internal_summary": "Shopper is requesting the exact decline reason for a recent order and their exact spending limit."
+      }
+    }
+  ],
+  "validation_violations": []
+}

@@ -1,0 +1,29 @@
+{
+  "id": "h04",
+  "user_id": "u005",
+  "question": "My order ord_0001 says it's overdue and I'm being charged a penalty \u00e2\u20ac\u201d how much do I owe and by when?",
+  "route": "both",
+  "answer": "I couldn't find an order **ord_0001** on your account \u2014 it may belong to a different account, or the ID may be off. Could you double check the order number? You can also let me know the merchant name and I can look it up that way with `get_orders`.\n\nFor reference, here's how the penalty/failed-payment process generally works so you know what to expect once we find the right order:\n- If an installment fails, Sezzle retries the charge automatically after 48 hours.\n- If that retry also fails, a **$10 failed-payment fee** is added and your account is deactivated for new purchases until the balance is settled.\n- That fee is waived once every rolling 12 months if you repay within 48 hours of the first failure notice.\n\nOnce you confirm the correct order ID (or merchant name), I can pull the exact amount owed and due date.",
+  "tool_trace": [
+    {
+      "name": "get_order_detail",
+      "input": {
+        "order_id": "ord_0001"
+      },
+      "output": {
+        "error": "not_found"
+      }
+    },
+    {
+      "name": "get_policy",
+      "input": {
+        "topic": "failed_payments"
+      },
+      "output": {
+        "topic": "failed_payments",
+        "text": "# Failed Payments\n\nWhen an installment charge fails:\n\n1. Sezzle notifies the shopper and **automatically retries after 48 hours**.\n2. If the retry fails, a **$10 failed-payment fee** is added and the shopper's account\n   is **deactivated for new purchases** until the balance is settled.\n3. The shopper can repay the failed installment (plus fee) any time in the app.\n\nThe failed-payment fee is **waived once per rolling 12 months** if the shopper repays\nwithin 48 hours of the first failure notice. Fee disputes beyond this policy must be\nescalated to a human agent \u00e2\u20ac\u201d support assistants must not promise ad-hoc waivers.\n"
+      }
+    }
+  ],
+  "validation_violations": []
+}

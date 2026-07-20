@@ -1,0 +1,72 @@
+{
+  "id": "v01",
+  "user_id": "u002",
+  "question": "When is my next payment for my Nordic Kicks order and how much is it?",
+  "route": "tool",
+  "answer": "Your next payment for the Nordic Kicks order (ord_3006) is **$118.36**, due on **2026-07-11**. This is the final installment (4 of 4) on the plan.",
+  "tool_trace": [
+    {
+      "name": "get_orders",
+      "input": {
+        "merchant_filter": "Nordic Kicks"
+      },
+      "output": [
+        {
+          "order_id": "ord_3006",
+          "merchant": "Nordic Kicks",
+          "status": "active",
+          "order_date": "2026-05-30",
+          "total": 473.5
+        }
+      ]
+    },
+    {
+      "name": "get_order_detail",
+      "input": {
+        "order_id": "ord_3006"
+      },
+      "output": {
+        "order_id": "ord_3006",
+        "user_id": "u002",
+        "merchant": "Nordic Kicks",
+        "order_date": "2026-05-30",
+        "total": 473.5,
+        "plan": "pay_in_4",
+        "status": "active",
+        "reschedules_used": 0,
+        "refund": null,
+        "installments": [
+          {
+            "installment": 1,
+            "amount": 118.38,
+            "due_date": "2026-05-30",
+            "status": "paid",
+            "paid_date": "2026-05-29"
+          },
+          {
+            "installment": 2,
+            "amount": 118.38,
+            "due_date": "2026-06-13",
+            "status": "paid",
+            "paid_date": "2026-06-12"
+          },
+          {
+            "installment": 3,
+            "amount": 118.38,
+            "due_date": "2026-06-27",
+            "status": "paid",
+            "paid_date": "2026-06-26"
+          },
+          {
+            "installment": 4,
+            "amount": 118.36,
+            "due_date": "2026-07-11",
+            "status": "upcoming",
+            "paid_date": null
+          }
+        ]
+      }
+    }
+  ],
+  "validation_violations": []
+}

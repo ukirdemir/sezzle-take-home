@@ -1,0 +1,82 @@
+{
+  "id": "v03",
+  "user_id": "u002",
+  "question": "Can I push back the payment date on my Nordic Kicks order?",
+  "route": "both",
+  "answer": "Yes \u2014 your Nordic Kicks order (ord_3006) is eligible:\n\n- Installment #4 ($118.36, due **2026-07-11**) is still upcoming, so it can be rescheduled.\n- You have **0 reschedules used** on this order, so this would be your **first reschedule \u2014 free**, and you can push the date up to 2 weeks (i.e., up to around 2026-07-25).\n- Just make sure to request it at least 24 hours before the July 11 due date, since same-day requests can't be processed.\n\nLet me know the new date you'd like and I can walk you through next steps.",
+  "tool_trace": [
+    {
+      "name": "get_orders",
+      "input": {
+        "merchant_filter": "Nordic Kicks"
+      },
+      "output": [
+        {
+          "order_id": "ord_3006",
+          "merchant": "Nordic Kicks",
+          "status": "active",
+          "order_date": "2026-05-30",
+          "total": 473.5
+        }
+      ]
+    },
+    {
+      "name": "get_policy",
+      "input": {
+        "topic": "rescheduling_payments"
+      },
+      "output": {
+        "topic": "rescheduling_payments",
+        "text": "# Rescheduling a Payment\n\nShoppers can move an upcoming installment's due date:\n\n- The **first reschedule on an order is free** and can push the date **up to 2 weeks**.\n- Each **subsequent reschedule on the same order costs $5** (see Fees Overview).\n- A maximum of **3 reschedules per order** is allowed.\n- A reschedule must be requested **at least 24 hours before** the installment due date.\n  Same-day requests cannot be processed by support or the app.\n- Only *upcoming* installments can be moved \u00e2\u20ac\u201d a failed installment must be repaid, not\n  rescheduled (see Failed Payments).\n\nRescheduling never changes the installment amount, only the date. Later installments\ndo not shift when an earlier one is rescheduled.\n"
+      }
+    },
+    {
+      "name": "get_order_detail",
+      "input": {
+        "order_id": "ord_3006"
+      },
+      "output": {
+        "order_id": "ord_3006",
+        "user_id": "u002",
+        "merchant": "Nordic Kicks",
+        "order_date": "2026-05-30",
+        "total": 473.5,
+        "plan": "pay_in_4",
+        "status": "active",
+        "reschedules_used": 0,
+        "refund": null,
+        "installments": [
+          {
+            "installment": 1,
+            "amount": 118.38,
+            "due_date": "2026-05-30",
+            "status": "paid",
+            "paid_date": "2026-05-29"
+          },
+          {
+            "installment": 2,
+            "amount": 118.38,
+            "due_date": "2026-06-13",
+            "status": "paid",
+            "paid_date": "2026-06-12"
+          },
+          {
+            "installment": 3,
+            "amount": 118.38,
+            "due_date": "2026-06-27",
+            "status": "paid",
+            "paid_date": "2026-06-26"
+          },
+          {
+            "installment": 4,
+            "amount": 118.36,
+            "due_date": "2026-07-11",
+            "status": "upcoming",
+            "paid_date": null
+          }
+        ]
+      }
+    }
+  ],
+  "validation_violations": []
+}

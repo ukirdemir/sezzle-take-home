@@ -1,0 +1,54 @@
+{
+  "id": "v06",
+  "user_id": "u003",
+  "question": "Bloom & Vine never shipped my order. What are my options?",
+  "route": "escalate",
+  "answer": "I've flagged this for a human agent to file the dispute. In the meantime, if you haven't already, please reach out to Bloom & Vine directly about the non-shipment \u2014 that's the first step in the process. Let me know which order this concerns (or if it's both) so I can pass that detail along.",
+  "tool_trace": [
+    {
+      "name": "get_orders",
+      "input": {
+        "merchant_filter": "Bloom & Vine"
+      },
+      "output": [
+        {
+          "order_id": "ord_3007",
+          "merchant": "Bloom & Vine",
+          "status": "active",
+          "order_date": "2026-06-19",
+          "total": 334.88
+        },
+        {
+          "order_id": "ord_3008",
+          "merchant": "Bloom & Vine",
+          "status": "active",
+          "order_date": "2026-05-25",
+          "total": 243.39
+        }
+      ]
+    },
+    {
+      "name": "get_policy",
+      "input": {
+        "topic": "disputes"
+      },
+      "output": {
+        "topic": "disputes",
+        "text": "# Disputes (Item Not Received / Not as Described)\n\nIf a merchant never shipped, shipped the wrong item, or the item is materially not as\ndescribed, the shopper can open a **dispute**:\n\n- Disputes must be opened **within 90 days** of the order date.\n- The shopper must first attempt to contact the merchant and allow **15 days** for a\n  response before Sezzle steps in.\n- While a dispute is **under investigation, upcoming installments on that order are\n  paused** \u00e2\u20ac\u201d the shopper is not charged until the dispute resolves.\n- Resolution typically takes 10\u00e2\u20ac\u201c20 business days.\n\nOpening, updating, or ruling on a dispute is a **human-agent action**. An assistant\nmay explain the process and eligibility but must escalate the actual filing.\n"
+      }
+    },
+    {
+      "name": "escalate_to_human",
+      "input": {
+        "reason": "dispute_filing",
+        "internal_summary": "Shopper reports Bloom & Vine never shipped an order; ambiguous between ord_3007 and ord_3008, needs dispute filing assistance."
+      },
+      "output": {
+        "escalated": true,
+        "reason": "dispute_filing",
+        "internal_summary": "Shopper reports Bloom & Vine never shipped an order; ambiguous between ord_3007 and ord_3008, needs dispute filing assistance."
+      }
+    }
+  ],
+  "validation_violations": []
+}

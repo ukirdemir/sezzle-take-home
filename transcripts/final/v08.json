@@ -1,0 +1,20 @@
+{
+  "id": "v08",
+  "user_id": "u001",
+  "question": "Does Sezzle charge interest if I pay on time?",
+  "route": "policy",
+  "answer": "No \u2014 Sezzle's pay-in-4 plan never charges interest, and there's no fee if you pay on time. The only charges that can apply are things like a $10 failed-payment fee, a $5 reschedule fee (for the 2nd/3rd reschedule), or a $10 reactivation fee \u2014 none of which apply if you're paying on schedule.",
+  "tool_trace": [
+    {
+      "name": "get_policy",
+      "input": {
+        "topic": "fees_overview"
+      },
+      "output": {
+        "topic": "fees_overview",
+        "text": "# Fees Overview\n\n| Fee | Amount | When |\n|---|---|---|\n| Failed-payment fee | $10 | Second failed charge attempt on an installment |\n| Reschedule fee | $5 | Second and third reschedule on an order (first is free) |\n| Account reactivation fee | $10 | Reactivating after 30+ days deactivated |\n| Interest | $0 | Sezzle pay-in-4 never charges interest |\n\nSezzle charges **no interest and no fee for paying on time**. Fee amounts are fixed;\nsupport assistants must not offer discounts or ad-hoc waivers (see Failed Payments\nfor the one automatic waiver rule).\n"
+      }
+    }
+  ],
+  "validation_violations": []
+}

@@ -1,0 +1,86 @@
+{
+  "id": "v10",
+  "user_id": "u005",
+  "question": "Circuit City Lights approved my return on June 28 \u2014 where is my money?",
+  "route": "both",
+  "answer": "Here's what I found on order ord_3014 (Circuit City Lights, $370.39 total):\n\n- A refund of **$185.19** was issued on **June 28, 2026**, and its status is currently **processing**.\n- Per Sezzle's refund policy, a refund is first applied to any remaining unpaid installments. In your case, all 4 installments were already paid off before the refund was issued, so the entire $185.19 should flow back to your original payment method rather than offsetting a balance.\n- That kind of refund typically takes **3\u201310 business days** to post to your payment method after being issued.\n\nSince it was issued on June 28, it's still within that window depending on today's date. If it's been more than 10 business days since June 28 and you still don't see it, let me know and I'll escalate this to a human agent to track down with the merchant.",
+  "tool_trace": [
+    {
+      "name": "get_orders",
+      "input": {
+        "merchant_filter": "Circuit City Lights"
+      },
+      "output": [
+        {
+          "order_id": "ord_3014",
+          "merchant": "Circuit City Lights",
+          "status": "active",
+          "order_date": "2026-05-16",
+          "total": 370.39
+        }
+      ]
+    },
+    {
+      "name": "get_policy",
+      "input": {
+        "topic": "refunds_returns"
+      },
+      "output": {
+        "topic": "refunds_returns",
+        "text": "# Refunds & Returns\n\nReturns are governed by the **merchant's** return policy; Sezzle processes the refund\nafter the merchant approves it.\n\nOnce a merchant issues a refund to Sezzle:\n\n- The refund is applied to the shopper's **remaining unpaid installments first**.\n- Any amount beyond the unpaid balance is returned to the shopper's payment method\n  within **3\u00e2\u20ac\u201c10 business days**.\n- Partial refunds reduce the final installments first (last installment shrinks first).\n\nIf a merchant has approved a return but the refund hasn't appeared after 10 business\ndays, escalate to a human agent with the order ID. Sezzle cannot force a merchant to\naccept a return.\n"
+      }
+    },
+    {
+      "name": "get_order_detail",
+      "input": {
+        "order_id": "ord_3014"
+      },
+      "output": {
+        "order_id": "ord_3014",
+        "user_id": "u005",
+        "merchant": "Circuit City Lights",
+        "order_date": "2026-05-16",
+        "total": 370.39,
+        "plan": "pay_in_4",
+        "status": "active",
+        "reschedules_used": 2,
+        "refund": {
+          "amount": 185.19,
+          "issued_date": "2026-06-28",
+          "status": "processing"
+        },
+        "installments": [
+          {
+            "installment": 1,
+            "amount": 92.6,
+            "due_date": "2026-05-16",
+            "status": "paid",
+            "paid_date": "2026-05-15"
+          },
+          {
+            "installment": 2,
+            "amount": 92.6,
+            "due_date": "2026-05-30",
+            "status": "paid",
+            "paid_date": "2026-05-30"
+          },
+          {
+            "installment": 3,
+            "amount": 92.6,
+            "due_date": "2026-06-13",
+            "status": "paid",
+            "paid_date": "2026-06-11"
+          },
+          {
+            "installment": 4,
+            "amount": 92.59,
+            "due_date": "2026-06-27",
+            "status": "paid",
+            "paid_date": "2026-06-25"
+          }
+        ]
+      }
+    }
+  ],
+  "validation_violations": []
+}

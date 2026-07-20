@@ -1,0 +1,20 @@
+{
+  "id": "v02",
+  "user_id": "u005",
+  "question": "How does Sezzle's pay-in-4 plan actually work?",
+  "route": "policy",
+  "answer": "Here's how Sezzle's standard Pay-in-4 plan works:\n\n- **4 equal installments spread over 6 weeks**: 25% is charged at checkout, then 25% every 2 weeks after that.\n- **First payment** happens immediately at purchase.\n- **Remaining 3 payments** auto-charge to your default payment method on their due dates (processed in the morning, local time).\n- **Early payments are free** \u2014 you can pay ahead at no cost, but it won't shift the remaining due dates.\n- Some merchants offer alternatives like pay-in-2 or monthly plans instead of the standard plan \u2014 whatever schedule applies to your order is shown in that order's detail page, since it's set at checkout.\n\nIf you want specifics on a particular order's payment amounts or due dates, just let me know which order and I can pull that up.",
+  "tool_trace": [
+    {
+      "name": "get_policy",
+      "input": {
+        "topic": "payment_schedules"
+      },
+      "output": {
+        "topic": "payment_schedules",
+        "text": "# Payment Schedules (Pay-in-4)\n\nSezzle's standard plan splits a purchase into **4 equal installments over 6 weeks**:\n25% at checkout, then 25% every 2 weeks. The schedule is fixed at order creation and\nshown in the app under the order detail.\n\n- The first installment is charged at the time of purchase.\n- Remaining installments auto-charge to the shopper's default payment method on the\n  due date (local time, morning batch).\n- Shoppers can pay any installment early at no cost; early payment does not change\n  later due dates.\n- Some merchants offer pay-in-2 or monthly plans; the order detail is the source of\n  truth for a given order's schedule.\n\nQuestions about a *specific* order's next payment date or amount must be answered\nfrom that order's record, not from this general policy.\n"
+      }
+    }
+  ],
+  "validation_violations": []
+}

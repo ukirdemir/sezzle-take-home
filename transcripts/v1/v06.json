@@ -1,0 +1,42 @@
+{
+  "id": "v06",
+  "user_id": "u003",
+  "question": "Bloom & Vine never shipped my order. What are my options?",
+  "route": "both",
+  "answer": "I found two active orders from Bloom & Vine on your account:\n\n1. **ord_3007** \u2013 $334.88, placed 2026-06-19\n2. **ord_3008** \u2013 $243.39, placed 2026-05-25\n\nCould you confirm which one never shipped? (Or if it's both, let me know that too.)\n\nIn the meantime, here's how the dispute process works for a non-shipped item:\n\n- **Contact the merchant first** and give them 15 days to respond, if you haven't already.\n- If unresolved, you can **open a dispute** (must be within 90 days of the order date \u2014 both orders qualify).\n- Once a dispute is **under investigation, your upcoming installments on that order are paused** \u2014 you won't be charged while it's being resolved.\n- Resolution typically takes **10\u201320 business days**.\n\nFiling the actual dispute requires a human agent, so once you confirm the order, I'll escalate it to get that started.",
+  "tool_trace": [
+    {
+      "name": "get_orders",
+      "input": {
+        "merchant_filter": "Bloom & Vine"
+      },
+      "output": [
+        {
+          "order_id": "ord_3007",
+          "merchant": "Bloom & Vine",
+          "status": "active",
+          "order_date": "2026-06-19",
+          "total": 334.88
+        },
+        {
+          "order_id": "ord_3008",
+          "merchant": "Bloom & Vine",
+          "status": "active",
+          "order_date": "2026-05-25",
+          "total": 243.39
+        }
+      ]
+    },
+    {
+      "name": "get_policy",
+      "input": {
+        "topic": "disputes"
+      },
+      "output": {
+        "topic": "disputes",
+        "text": "# Disputes (Item Not Received / Not as Described)\n\nIf a merchant never shipped, shipped the wrong item, or the item is materially not as\ndescribed, the shopper can open a **dispute**:\n\n- Disputes must be opened **within 90 days** of the order date.\n- The shopper must first attempt to contact the merchant and allow **15 days** for a\n  response before Sezzle steps in.\n- While a dispute is **under investigation, upcoming installments on that order are\n  paused** \u00e2\u20ac\u201d the shopper is not charged until the dispute resolves.\n- Resolution typically takes 10\u00e2\u20ac\u201c20 business days.\n\nOpening, updating, or ruling on a dispute is a **human-agent action**. An assistant\nmay explain the process and eligibility but must escalate the actual filing.\n"
+      }
+    }
+  ],
+  "validation_violations": []
+}

@@ -1,0 +1,19 @@
+{
+  "id": "h03",
+  "user_id": "u001",
+  "question": "What's the status of my order ord_9999?",
+  "route": "tool",
+  "answer": "I couldn't find order ord_9999 on your account \u2014 it may not exist or may not belong to this account. Could you double-check the order ID, or would you like me to list your current orders so you can pick the right one?",
+  "tool_trace": [
+    {
+      "name": "get_order_detail",
+      "input": {
+        "order_id": "ord_9999"
+      },
+      "output": {
+        "error": "not_found"
+      }
+    }
+  ],
+  "validation_violations": []
+}
