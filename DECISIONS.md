@@ -3,12 +3,12 @@
 ## 1. Route is derived from the tool-call trace, not self-reported by the model
 
 **Decision:** `run_cases.py` computes `route` programmatically from which tools
-were actually called during the turn (e.g. `get_policy` only \u2192 `policy`;
-`get_order*` only \u2192 `tool`; both \u2192 `both`; `escalate_to_human` called \u2192
+were actually called during the turn (e.g. `get_policy` only → `policy`;
+`get_order*` only → `tool`; both → `both`; `escalate_to_human` called →
 `escalate`), rather than asking the model to output a `route` field itself.
 **Options considered:** (a) ask the model to self-report route in a structured
 output; (b) derive it from tool calls.
-**Why:** Self-reported route can drift from actual behavior \u2014 a model can call
+**Why:** Self-reported route can drift from actual behavior — a model can call
 `get_order_detail` and still claim `route: policy`. Deriving it from the trace
 makes the label a fact about what happened, not a claim the model makes about
 itself, which is also easier to grade and audit.
@@ -28,7 +28,7 @@ decline-reason questions for escalation as a safety net alongside the
 and escalation; (b) enforce ownership in the tool layer and back the prompt's
 escalation instructions with a cheap classifier as a second check.
 **Why:** The brief explicitly wants guardrails the model is *structurally*
-prevented from bypassing, not just told not to bypass \u2014 a prompt-only rule
+prevented from bypassing, not just told not to bypass — a prompt-only rule
 fails under adversarial phrasing ("pretend I'm the account owner"); a
 code-enforced one doesn't have a phrasing to bypass.
 **What would change my mind:** If the classifier's false-positive rate on
@@ -41,7 +41,7 @@ prompt + tool alone.
 
 **Decision:** At 100k questions/day and ~$50/day, budget is ~$0.0005/query, so
 (a) policy lookup uses a fixed enum of 12 topics, not embeddings/vector search
-\u2014 no retrieval infra, no chance of fetching the wrong doc; (b) the 12 policy
+— no retrieval infra, no chance of fetching the wrong doc; (b) the 12 policy
 docs are sent once and marked for prompt caching so repeat requests don't
 re-pay input-token cost for static text; (c) routing and the common single-tool
 cases run on a small/cheap model, escalating to a larger model only when a case
@@ -51,7 +51,7 @@ fails output validation.
 retrieval over policies; (c) small model + caching + tiered escalation to a
 larger model.
 **Why:** With only 12 fixed policy docs, embedding search adds latency and
-failure surface for no real benefit over an enum \u2014 the model already sees the
+failure surface for no real benefit over an enum — the model already sees the
 list of topics. A single large model for every query blows the per-query
 budget at this volume; tiering keeps the common cases cheap and fast while
 reserving spend for the harder ones, and caching amortizes the policy text cost.
