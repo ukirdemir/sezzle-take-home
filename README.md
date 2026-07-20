@@ -13,6 +13,15 @@ If `./tmp` still exists (first checkout only), lay out the raw files first:
 bash scripts/bootstrap_layout.sh
 ```
 
+`run_cases.py <cases.jsonl> <answers.jsonl> [--transcripts-dir DIR]` is the
+core contract: it reads a JSONL of `{id, question, user_id}` and writes
+`{id, route, answer}` per line. `scripts/grade_cases.py <cases.jsonl>
+<answers.jsonl>` then compares that output against each case's
+`expected_route` / `must_include` / `must_not_include` and prints a pass/fail
+table. `--transcripts-dir` is optional but used throughout this repo — it
+writes one full tool-call trace per case, which is what all the diagnosis in
+`ITERATION.md` is actually done from.
+
 Reproduce this project's two required runs (each is a real, billed API call):
 
 ```
